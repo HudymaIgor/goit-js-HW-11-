@@ -61,6 +61,7 @@ button[type="submit"]:hover {
 .section{
 display: flex;
   flex-wrap: wrap;
+  padding-top: 100px;
   gap: 20px;
 
 }
