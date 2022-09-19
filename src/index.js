@@ -20,7 +20,7 @@ const onSearthFormSubmit = async event => {
 
     unsplashApi.searchQuery = event.currentTarget.elements.searchQuery.value;
     unsplashApi.page = 1;
-loadMoreBtnEl.classList.add('is-hiden')
+    loadMoreBtnEl.classList.add('is-hiden');
 
         try {
             const { data } = await unsplashApi.fetchPhotosByQuery()
@@ -28,7 +28,9 @@ loadMoreBtnEl.classList.add('is-hiden')
             lightbox.refresh();
 
             if (data.totalHits > unsplashApi.per_page) {
-                loadMoreBtnEl.classList.remove('is-hiden')  
+                loadMoreBtnEl.classList.remove('is-hiden');
+                loadMoreBtnEl.addEventListener('click', onloadMoreBtnElClick);
+                
             } 
 
             if (data.totalHits === 0) { 
@@ -52,7 +54,8 @@ const onloadMoreBtnElClick = async event => {
         galleryEl.insertAdjacentHTML('beforeend', posts(data.hits));
               lightbox.refresh();
 
-             if (data.hits.length === 0 ) { 
+        if (data.hits.length === 0) { 
+              
                  loadMoreBtnEl.classList.add('is-hiden');  
                  loadMoreBtnEl.removeEventListener('click', onloadMoreBtnElClick);  
                  Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
@@ -63,8 +66,9 @@ console.log(err)
     }
 
 }
-searchForm.addEventListener('submit', onSearthFormSubmit)
-loadMoreBtnEl.addEventListener('click', onloadMoreBtnElClick)
+
+searchForm.addEventListener('submit', onSearthFormSubmit);
+
 
 
 
